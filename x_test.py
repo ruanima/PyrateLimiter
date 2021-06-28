@@ -1,5 +1,5 @@
 from pyrate_limiter import *
-from time import sleep
+from time import sleep, time
 
 rate = RequestRate(3, 5 * Duration.SECOND)
 limiter = Limiter(rate)
@@ -9,7 +9,7 @@ has_raised = False
 try:
     for _ in range(4):
         limiter.try_acquire(item)
-        sleep(1)
+        # sleep(1)
 except BucketFullException as err:
     has_raised = True
     assert str(err)
